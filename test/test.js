@@ -1,5 +1,7 @@
 var assert = require('assert');
 var semver = require('semver');
+var fs = require('fs');
+var yaml = require('js-yaml');
 var requireAll = require('..');
 
 var controllers = requireAll({
@@ -239,6 +241,27 @@ assert.deepEqual(filterFunction, {
     'other': {
       index: 1,
       show: 2
+    }
+  }
+});
+
+var overrideFunction = requireAll({
+  dirname     :  __dirname + '/override',
+  filter      : /^([^\.].*)\.y(a?)ml?$/,
+  recursive   : true,
+  override    : function (file) {
+    return yaml.safeLoad(fs.readFileSync(file, 'utf8'));
+  }
+});
+
+assert.deepEqual(overrideFunction, {
+  test: {
+    foo: 'bar'
+  },
+
+  sub: {
+    deep: {
+      bar: 'baz'
     }
   }
 });
