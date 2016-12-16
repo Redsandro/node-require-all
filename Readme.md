@@ -83,9 +83,9 @@ var controllers = requireAll({
 });
 ```
 
-### Override require
+### loader require
 
-If your directory contains non-require-able files, you can override the `require` function in order to create a custom map. E.g. load pictures into binary data or `yaml` files into objects.
+If your directory contains non-require-able files, you can loader the `require` function in order to create a custom map. E.g. load pictures into binary data or `yaml` files into objects.
 
 ```js
 var fs = require('fs');
@@ -94,7 +94,7 @@ var config = require('require-all')({
   dirname     :  __dirname + '/config',
   filter      : /^([^\.].*)\.ya?ml$/,
   recursive   : true,
-  override    : function (file) {
+  loader      : function (file) {
     return yaml.safeLoad(fs.readFileSync(file, 'utf8'));
   }
 });

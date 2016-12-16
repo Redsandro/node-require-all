@@ -12,7 +12,7 @@ module.exports = function requireAll(options) {
   var recursive = options.recursive === undefined ? DEFAULT_RECURSIVE : options.recursive;
   var resolve = options.resolve || identity;
   var map = options.map || identity;
-  var override = options.override || require;
+  var loader = options.loader || require;
 
   function excludeDirectory(dirname) {
     return !recursive ||
@@ -44,14 +44,14 @@ module.exports = function requireAll(options) {
         excludeDirs: excludeDirs,
         map: map,
         resolve: resolve,
-        override: override
+        loader: loader
       });
 
     } else {
       var name = filterFile(file);
       if (!name) return;
 
-      modules[map(name, filepath)] = resolve(override(filepath));
+      modules[map(name, filepath)] = resolve(loader(filepath));
     }
   });
 

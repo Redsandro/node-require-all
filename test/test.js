@@ -244,16 +244,16 @@ assert.deepEqual(filterFunction, {
   }
 });
 
-var overrideFunction = requireAll({
-  dirname     :  __dirname + '/override',
+var loaderFunction = requireAll({
+  dirname     :  __dirname + '/loader',
   filter      : /^([^\.].*)\.txt$/,
   recursive   : true,
-  override    : function (file) {
+  loader      : function (file) {
     return fs.readFileSync(file, 'utf8');
   }
 });
 
-assert.deepEqual(overrideFunction, {
+assert.deepEqual(loaderFunction, {
   test: 'Hello\n',
 
   sub: {
