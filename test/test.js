@@ -247,21 +247,17 @@ assert.deepEqual(filterFunction, {
 
 var overrideFunction = requireAll({
   dirname     :  __dirname + '/override',
-  filter      : /^([^\.].*)\.y(a?)ml?$/,
+  filter      : /^([^\.].*)\.txt$/,
   recursive   : true,
   override    : function (file) {
-    return yaml.safeLoad(fs.readFileSync(file, 'utf8'));
+    return fs.readFileSync(file, 'utf8');
   }
 });
 
 assert.deepEqual(overrideFunction, {
-  test: {
-    foo: 'bar'
-  },
+  test: 'Hello\n',
 
   sub: {
-    deep: {
-      bar: 'baz'
-    }
+    deep: 'Good Sir\n'
   }
 });
