@@ -1,7 +1,6 @@
 var assert = require('assert');
 var semver = require('semver');
 var fs = require('fs');
-var yaml = require('js-yaml');
 var requireAll = require('..');
 
 var controllers = requireAll({
