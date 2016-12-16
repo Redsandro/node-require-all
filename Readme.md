@@ -92,7 +92,7 @@ var fs = require('fs');
 var yaml = require('js-yaml');
 var config = require('require-all')({
   dirname     :  __dirname + '/config',
-  filter      : /^([^\.].*)\.y(a?)ml?$/,
+  filter      : /^([^\.].*)\.ya?ml$/,
   recursive   : true,
   override    : function (file) {
     return yaml.safeLoad(fs.readFileSync(file, 'utf8'));
